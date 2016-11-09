@@ -1,22 +1,22 @@
-#' Average Path Length
+#' Diameter
 #'
-#' @description Calculate the average path length of a graph.
+#' @description Calculate the diameter of a graph.
 #' @param Network The input network.
 #' @param probability The confidence level probability
 #' @param error The sampling error
 #' @param Cores Number of cores to use in the computations
-#' @param full.apl  It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.
-#' @details The average path length (APL) is the average shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.apl} calculates the population APL and estimated APL of graph g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
+#' @param full.apl It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.
+#' @details The diameter is the largest shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated) diameter of graph \emph{Network} with a justified error.
 #' @return A real network
 #' @author Luis Castro, Nazrul Shaihk.
 #' @examples \dontrun{
 #' ##Default function
 #' x <-  net.er.gnp(1000,0.01)
-#' metric.distance.apl(x)
+#' metric.distance.diameter(x)
 #' ##Population APL
-#' metric.distance.apl(x, full.apl=TRUE)
+#' metric.distance.diameter(x, full.apl=TRUE)
 #'##Sampling at 99% level with an error of 10% using 5 cores
-#'metric.distance.apl(Network = x, probability=0.99, error=0.1, Cores=5)
+#'metric.distance.diameter(Network = x, probability=0.99, error=0.1, Cores=5)
 #'}
 #'
 #' @import parallel
@@ -26,10 +26,8 @@
 #' @references Dijkstra EW. A note on two problems in connexion with graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
 #' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
 
-
-
-metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
-                              Cores=1, full.apl=FALSE){
+metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
+                                 Cores=1, full.apl=FALSE){
 
 
   ##//Inner function SPL by edeges
@@ -159,7 +157,7 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
 
 
   ##/Calculate APL (change here to median/max/min for Cristian!)
-  Paths <- mean(unlist(Paths))
+  Paths <- max(unlist(Paths))
 
   ##/Return final output
   return(Paths)
