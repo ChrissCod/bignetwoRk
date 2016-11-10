@@ -1,4 +1,4 @@
-#' Watts-Strogatz small-world network
+#' Watts-Strogatz Small-world Network
 #'
 #' @description Simulate a small-world network according to the model of Watts and Strogatz (1998).
 #' @param n The number of the nodes in the network (or lattice).
