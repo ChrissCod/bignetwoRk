@@ -2,9 +2,13 @@ Package: bignetwoRk
 Type: Package
 Title: Large Network Social Analysis
 Version: 0.1.0
-Author: Nazrul Shaikh, Luis Castro, Xu Dong.
-Maintainer: Nazrul Shaikh <n.shaikh@miami.edu>,
-            Luis Castro <luiscastroabril@gmail.com>,
+Authors@R: c(
+  person("Nazrul", "Shaikh", email = "n.shaikh@miami.edu", role = "aut"),
+  person("Luis", "Castro", email = "luiscastroabril@miami.edu", role = "aut"),
+  person("Xu", "Dong", email = "x.dong3@umiami.edu", role="aut"),
+  person("Christian", "Llano", email = "cxl985@umiami.edu", role="cre")
+  )
+Maintainer: Luis Castro <luiscastroabril@gmail.com>,
             Xu Dong <x.dong3@umiami.edu>,
             Christian Llano Robayo <cpaulcod@gmail.com>
 Description: We present an implementation of the algorithms required to simulate networks and their most relevant metrics.
