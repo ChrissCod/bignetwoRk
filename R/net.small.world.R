@@ -6,7 +6,7 @@
 #' @param re Rewiring probability.
 #' @details The formation of Watts-Strogatz network starts with a ring lattice with \emph{n} nodes and \emph{k} edges per node, then each edge is rewired at random with probability \emph{re}.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Xu Dong
+#' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
 #' g <- net.small.world(1000, 10, 0.05)}
 #' @import parallel
