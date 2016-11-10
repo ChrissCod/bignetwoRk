@@ -1,10 +1,10 @@
 #' Holme-Kim Network
 #'
-#' @description Simulate a scale-free network, including a "triad formation" step that compensate the low clustering in B-A networks (Holme and Kim, 1999).
+#' @description Simulate a scale-free network with relatively high clustering, comparing to B-A networks (Holme and Kim, 1999).
 #' @param n Number of nodes of the network.
 #' @param m Number of nodes to which a new node connects at each iteration.
 #' @param pt Triad formation probability after each preferential attachment mechanism.
-#' @details The Holme-Kim network model is a simple extension of B-A model. It adds an additional step, called "Triad formation", with the probability /emph{pt} that compensate the low clustering in B-A networks.
+#' @details The Holme-Kim network model is a simple extension of B-A model. It adds an additional step, called "Triad formation", with the probability \emph{pt} that compensates the low clustering in B-A networks.
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
