@@ -1,14 +1,14 @@
 
-#' Barabasi-Albert scale-free graph
+#' Barabasi-Albert Scale-free Graph
 #'
 #' @description Simulate a scale-free network using a preferential attachment mechanism (Barabasi and Albert, 1999)
 #' @param n Number of nodes of the network.
 #' @param m Number of nodes to which a new node connects at each iteration.
 #' @param ncores Number of cores, by default \code{detectCores()} from \code{parallel}.
-#' @param d A logical value determining whether is a network directed (default) or indirected.
-#' @details ...
+#' @param d A logical value determining whether the generated network is a directed or undirected (default) network.
+#' @details Starting with \emph{m} nodes, the preferential attachment mechaism adds one node and \emph{m} edges in each step. The edges will be placed with one end on the newly-added node and the other end on the existing nodes, according to probabilities that associate with their current degrees.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Luis Castro, Nazrul Shaikh.
+#' @author Luis Castro, Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
 #' x <- net.barabasi.albert(1000, 20) # using default ncores }
 #' @import parallel
@@ -17,7 +17,7 @@
 #' @references Barabasi, A.- L. and Albert R. 1999. Emergence of scaling in random networks. Science, 286 509-512.
 
 
-net.barabasi.albert <- function(n, m, ncores = detectCores(), d = TRUE ){
+net.barabasi.albert <- function(n, m, ncores = detectCores(), d = FALSE ){
 
   if (!ncores%%1==0){
     stop("Parameter ncores must be integer",call. = FALSE)}
