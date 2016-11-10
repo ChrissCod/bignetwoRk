@@ -116,13 +116,13 @@ net.barabasi.albert <- function(n, m, ncores = detectCores(), d = TRUE ){
         }
 
         cfun <- function(a,b){
-          cc = mapply(c,a,b, SIMPLIFY=FALSE)
+          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
           cc
         }
 
         reverselist <- foreach(i = 1:ncores, .combine='cfun') %dopar% reverse.connect(i)
 
-        Network = mapply(c,neilist,reverselist, SIMPLIFY=FALSE)
+        Network <- mapply(c,neilist,reverselist, SIMPLIFY=FALSE)
         stopCluster(cl)
         Network
       }
