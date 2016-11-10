@@ -27,7 +27,7 @@ When \code{d = TRUE} is a directed network.
 }
 \examples{
 \dontrun{
-x <- net.erdos.renyi.gnp(1000, 0.01) }
+x <- net.erdos.renyi.gnp(1000, 0.01)}
 }
 \author{
 Luis Castro, Xu Dong, Nazrul Shaihk.

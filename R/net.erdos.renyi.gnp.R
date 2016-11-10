@@ -10,7 +10,7 @@
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Luis Castro, Xu Dong, Nazrul Shaihk.
 #' @examples \dontrun{
-#' x <- net.erdos.renyi.gnp(1000, 0.01) }
+#' x <- net.erdos.renyi.gnp(1000, 0.01)}
 #' @import parallel
 #' @import doParallel
 #' @import foreach

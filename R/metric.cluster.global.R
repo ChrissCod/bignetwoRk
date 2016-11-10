@@ -15,7 +15,6 @@
 #' @export
 #' @import parallel
 #' @import doParallel
-#' @import foreach
 
 metric.cluster.global <- function(Network,node.sample, triplet.sample){
 
