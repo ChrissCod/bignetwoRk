@@ -5,7 +5,7 @@
 #' @param k Number of edges per node.
 #' @details The \emph{n} nodes are placed on a circle and each node is connected to the nearest \emph{k} neighbors.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Xu Dong
+#' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
 #' g <- net.ring.lattice(1000, 10)}
 #' @import parallel
