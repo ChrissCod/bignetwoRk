@@ -1,9 +1,4 @@
-##Parameters
-#m - Number of caves/groups
-#k - Number of nodes per cave
-#cl - a cluster object
-
-#' Caveman network
+#' Caveman Network
 #'
 #' @description Simulate a (connected) caveman network of \emph{m} cliques of size \emph{k}.
 #' @param m Number of cliques (or caves) in the network.
