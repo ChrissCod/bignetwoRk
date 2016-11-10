@@ -3,13 +3,11 @@ Type: Package
 Title: Large Network Social Analysis
 Version: 0.1.0
 Authors@R: c(
-  person("Nazrul", "Shaikh", email = "n.shaikh@miami.edu", role = c("aut")),
-  person("Luis", "Castro", email = "luiscastroabril@miami.edu", role =c("aut", "cre")
-  person("Xu", "Dong", email = "x.dong3@umiami.edu", role=c("aut","cre")),
-  person("Christian", "Llano", email = "cxl985@umiami.edu", role=c("cre"))
+  person("Nazrul", "Shaikh", email = "n.shaikh@miami.edu", role = "aut"),
+  person("Luis", "Castro", email = "luiscastroabril@miami.edu", role = "aut"),
+  person("Xu", "Dong", email = "x.dong3@umiami.edu", role="aut"),
+  person("Christian", "Llano", email = "cxl985@umiami.edu", role="cre")
   )
-
-
 Maintainer: Luis Castro <luiscastroabril@gmail.com>,
             Xu Dong <x.dong3@umiami.edu>,
             Christian Llano Robayo <cpaulcod@gmail.com>
