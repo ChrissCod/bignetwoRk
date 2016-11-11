@@ -5,10 +5,10 @@
 #' @param probability The confidence level probability
 #' @param error The sampling error
 #' @param Cores Number of cores to use in the computations
-#' @param full.apl It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.
+#' @param full It will calculate the popular full version by default. If it is set to FALSE, the estimated diameter will be calculated.
 #' @details The diameter is the largest shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated) diameter of graph \emph{Network} with a justified error.
 #' @return A real network
-#' @author Luis Castro, Nazrul Shaihk.
+#' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
 #' ##Default function
 #' x <-  net.er.gnp(1000,0.01)
@@ -27,7 +27,7 @@
 #' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
 
 metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
-                                 Cores=1, full.apl=FALSE){
+                                 Cores=detectCores(), full=TRUE){
 
 
   ##//Inner function SPL by edeges
@@ -115,8 +115,8 @@ metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
 
   #Final sample size
 
-  #/Sample APL
-  if (full.apl==FALSE){
+  #/Sample
+  if (full==FALSE){
     d <- 1-probability
     Z <- stats::qnorm(1-d/2)
     s <- round((min(N,(Z*v/error)**2)/Cores))*Cores
@@ -133,8 +133,8 @@ metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
     }
   }
 
-  #/Full APL
-  if (full.apl==TRUE){
+  #/Full
+  if (full==TRUE){
     s <- round((N/Cores))*Cores
     #print(s)
     #print(N)
@@ -155,8 +155,7 @@ metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
   Paths <- parLapply(cl=cl,S,Shortest.path.big,network=Network)
   stopCluster(cl)
 
-
-  ##/Calculate APL (change here to median/max/min for Cristian!)
+  ##/Calculate Diameter
   Paths <- max(unlist(Paths))
 
   ##/Return final output
