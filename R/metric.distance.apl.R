@@ -8,7 +8,7 @@
 #' @param full.apl  It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.
 #' @details The average path length (APL) is the average shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.apl} calculates the population APL and estimated APL of graph g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
 #' @return A real network
-#' @author Luis Castro, Nazrul Shaihk.
+#' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
 #' ##Default function
 #' x <-  net.er.gnp(1000,0.01)
