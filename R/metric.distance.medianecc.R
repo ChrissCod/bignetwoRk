@@ -1,9 +1,8 @@
 #' Median Eccentricity
 #'
-
-#' @description Calculate the median eccentricity of a graph.
+#' @description Calculate the (estimated) median eccentricity of a graph.
 #' @param g	The input network.
-#' @param p The confidence level probability.
+#' @param p The sampling probability.
 #' @details The median eccentricity is the median eccentricities of all nodes in graph \emph{g}. metric.distance.medianecc calculates the (estimated) median eccentricity of graph g with a justified error.
 #' @return A real constant.
 #' @author Xu Dong, Nazrul Shaikh.
@@ -12,6 +11,7 @@
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
 #' metric.distance.medianecc(x, 0.01)}
 #' @export
+#' @import igraph
 #' @import parallel
 #' @import doParallel
 #' @import foreach
