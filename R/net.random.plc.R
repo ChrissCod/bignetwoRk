@@ -1,11 +1,11 @@
 
-#' Random network with power-law degree distribution with cutoff
+#' Random Network with a Power-law Degree Distribution that Has An Exponential Cutoff
 #'
-#' @description Simulate a random network with a power-law degree distribution, according to Newman et al. (2001).
+#' @description Simulate a random network with a power-law degree distribution that has an exponential cutoff, according to Newman et al. (2001).
 #' @param n  The number of the nodes in the network.
 #' @param cutoff Exponential cutoff of the degree distribution of the network.
 #' @param exponent Exponent of the degree distribution of the network.
-#' @details This random network has a power-law degree distribution with an exponential degree cutoff.
+#' @details The generated random network has a power-law degree distribution with an exponential degree cutoff.
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{

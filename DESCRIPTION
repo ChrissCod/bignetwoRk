@@ -1,7 +1,8 @@
 Package: bignetwoRk
 Type: Package
-Title: Large Network Social Analysis
+Title: Large-scale Social Network Analysis
 Version: 0.1.0
+<<<<<<< HEAD
 Authors@R: c(
   person("Nazrul", "Shaikh", email = "n.shaikh@miami.edu", role = "aut"),
   person("Luis", "Castro", email = "luiscastroabril@miami.edu", role = "aut"),
@@ -9,15 +10,19 @@ Authors@R: c(
   person("Christian", "Llano", email = "cxl985@umiami.edu", role="cre")
   )
 Maintainer: Luis Castro <luiscastroabril@gmail.com>,
+=======
+Author: Nazrul Shaikh, Xu Dong, Luis Castro.
+Maintainer: Nazrul Shaikh <n.shaikh@miami.edu>,
+>>>>>>> origin/master
             Xu Dong <x.dong3@umiami.edu>,
+            Luis Castro <luiscastroabril@gmail.com>,
             Christian Llano Robayo <cpaulcod@gmail.com>
-Description: We present an implementation of the algorithms required to simulate networks and their most relevant metrics.
+Description: We present an implementation of the algorithms required to simulate large-scale social networks and their most relevant metrics.
 License: GPL (>= 2)
 LazyData: TRUE
-Imports: igraph (>=	1.0.1),
-    doParallel (>= 1.0.10),
-    foreach (>= 1.4.3),
-    parallel (>= 3.3.1),
-    plyr (>= 1.8.4)
+Imports: igraph (>= 1.0.1),
+         doParallel (>= 1.0.10),
+         foreach (>= 1.4.3),
+         parallel (>= 3.3.1),
 Depends: R (>= 3.3.2)
 RoxygenNote: 5.0.1

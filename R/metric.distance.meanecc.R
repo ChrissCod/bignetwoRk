@@ -1,9 +1,8 @@
 #' Mean Eccentricity
 #'
-
 #' @description Calculate the mean eccentricity of a graph.
 #' @param g	The input network.
-#' @param p The confidence level probability.
+#' @param p The sampling probability.
 #' @param ncores The number of cores
 #' @details The mean eccentricities of all nodes in graph \emph{g}. Calculates the (estimated) mean eccentricity of graph \emph{g} with a justified error.
 #' @return A real constant.
@@ -13,6 +12,7 @@
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
 #' metric.distance.meanecc(x, 0.01)}
 #' @export
+#' @import igraph
 #' @import parallel
 #' @import doParallel
 #' @import foreach

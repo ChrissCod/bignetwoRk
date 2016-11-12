@@ -1,4 +1,4 @@
-#' Complete network
+#' Complete Network
 #'
 #' @description Simulate a complete (or full) network.
 #' @param n Number of nodes of the network.

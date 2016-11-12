@@ -1,11 +1,11 @@
-#' k - regular ring lattice
+#' \emph{k} - regular ring lattice
 #'
 #' @description Simulate a network with a \emph{k} -regular ring lattice structure.
-#' @param n Number of nodes of the network.
+#' @param n Number of nodes in the network.
 #' @param k Number of edges per node.
 #' @details The \emph{n} nodes are placed on a circle and each node is connected to the nearest \emph{k} neighbors.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Xu Dong
+#' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
 #' g <- net.ring.lattice(1000, 10)}
 #' @import parallel

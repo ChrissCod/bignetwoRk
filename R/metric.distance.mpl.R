@@ -1,20 +1,20 @@
 #' Median Path Length
 #'
-#' @description Calculate the median path length of a graph.
+#' @description Calculate the median path length (MPL) of a network.
 #' @param Network The input network.
 #' @param probability The confidence level probability
 #' @param error The sampling error
 #' @param Cores Number of cores to use in the computations
-#' @param full.apl  It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.
-#' @details The median path length (APL) is the median shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.apl} calculates the population APL and estimated APL of graph g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
-#' @return A real network
-#' @author Luis Castro, Nazrul Shaihk.
+#' @param full  It calculates the sampling version by default. If it is set to true, the population MPL will be calculated and the rest of the parameters will be ignored.
+#' @details The median path length (MPL) is the median shortest path lengths of all pairs of nodes in \emph{Network}. \emph{metric.distance.mpl(g)} calculates the population MPL OR estimated MPL of network g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
+#' @return A real integer
+#' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
 #' ##Default function
 #' x <-  net.er.gnp(1000,0.01)
 #' metric.distance.mpl(x)
 #' ##Population MPL
-#' metric.distance.mpl(x, full.apl=TRUE)
+#' metric.distance.mpl(x, full=TRUE)
 #'##Sampling at 99% level with an error of 10% using 5 cores
 #'metric.distance.mpl(Network = x, probability=0.99, error=0.1, Cores=5)
 #'}
@@ -29,7 +29,7 @@
 
 
 metric.distance.mpl <-  function(Network,probability=0.95,error=0.03,
-                                 Cores=1, full.apl=FALSE){
+                                 Cores=1, full=FALSE){
 
   ##//Inner function SPL by edeges
 
@@ -116,8 +116,8 @@ metric.distance.mpl <-  function(Network,probability=0.95,error=0.03,
 
   #Final sample size
 
-  #/Sample APL
-  if (full.apl==FALSE){
+  #/Sample
+  if (full==FALSE){
     d <- 1-probability
     Z <- stats::qnorm(1-d/2)
     s <- round((min(N,(Z*v/error)**2)/Cores))*Cores
@@ -134,8 +134,8 @@ metric.distance.mpl <-  function(Network,probability=0.95,error=0.03,
     }
   }
 
-  #/Full APL
-  if (full.apl==TRUE){
+  #/Full
+  if (full==TRUE){
     s <- round((N/Cores))*Cores
     #print(s)
     #print(N)
@@ -157,7 +157,7 @@ metric.distance.mpl <-  function(Network,probability=0.95,error=0.03,
   stopCluster(cl)
 
 
-  ##/Calculate APL (change here to median/max/min for Cristian!)
+  ##/Calculate MPL
   Paths <- stats::median(unlist(Paths))
 
   ##/Return final output

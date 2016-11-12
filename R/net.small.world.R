@@ -1,12 +1,12 @@
-#' Watts-Strogatz small-world network
+#' Watts-Strogatz Small-world Network
 #'
-#' @description Simulate a network according to the model of Watts and Strogatz (1998).
+#' @description Simulate a small-world network according to the model of Watts and Strogatz (1998).
 #' @param n The number of the nodes in the network (or lattice).
 #' @param k Number of edges per node.
 #' @param re Rewiring probability.
-#' @details The formation of the network starts with a ring lattice with \emph{n} nodes and \emph{k} edges per node, then each edge is rewired at random with probability \emph{re}.
+#' @details The formation of Watts-Strogatz network starts with a ring lattice with \emph{n} nodes and \emph{k} edges per node, then each edge is rewired at random with probability \emph{re}.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Xu Dong
+#' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
 #' g <- net.small.world(1000, 10, 0.05)}
 #' @import parallel
