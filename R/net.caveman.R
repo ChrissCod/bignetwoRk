@@ -11,7 +11,6 @@
 #' @author Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
 #' x <- net.caveman(50, 20) #using ncores by default }
-#' @import parallel
 #' @import doParallel
 #' @export
 #' @references Watts, D. J. Networks, Dynamics, and the Small-World Phenomenon. Amer. J. Soc. 105, 493-527, 1999.

@@ -11,7 +11,10 @@
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
 #' metric.cluster.mean(x)}
 #' @export
-#' @import igraph
+#' @importFrom igraph as.undirected
+#' @importFrom igraph graph_from_adj_list
+#' @importFrom igraph simplify
+#' @importFrom igraph transitivity
 #'
 
 

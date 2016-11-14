@@ -4,17 +4,15 @@ Title: Large-scale Social Network Analysis
 Version: 0.1.0
 Authors@R: c(
   person("Nazrul", "Shaikh", email = "n.shaikh@miami.edu", role = "aut"),
+  person("Xu", "Dong", email = "x.dong3@umiami.edu", role=c("aut","cre")),
   person("Luis", "Castro", email = "luiscastroabril@miami.edu", role = "aut"),
-  person("Xu", "Dong", email = "x.dong3@umiami.edu", role="aut"),
-  person("Christian", "Llano", email = "cxl985@umiami.edu", role="cre")
+  person("Christian", "Llano", email = "cxl985@umiami.edu", role="ctb")
   )
 Description: We present an implementation of the algorithms required to simulate large-scale social networks and their most relevant metrics.
 License: GPL (>= 2)
-LazyData: TRUE
 Imports: 
-         doParallel (>= 1.0.10),
-         foreach (>= 1.4.3),
-         igraph (>= 1.0.1),
-         parallel (>= 3.3.1),
+         doParallel (>= 1.0.10)
+         igraph (>= 1.0.1)
 Depends: R (>= 3.3.2)
+BugReports: https://github.com/ChrissCod/bignetwoRk/issues
 RoxygenNote: 5.0.1
