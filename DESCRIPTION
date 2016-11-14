@@ -10,8 +10,9 @@ Authors@R: c(
   )
 Description: We present an implementation of the algorithms required to simulate large-scale social networks and their most relevant metrics.
 License: GPL (>= 2)
-Imports: 
-         doParallel (>= 1.0.10),
+Imports: doParallel (>= 1.0.10),
+         parallel (>= 3.3.2),
+         foreach (>= 1.4.3),
          igraph (>= 1.0.1)
 Depends: R (>= 3.3.2)
 BugReports: https://github.com/ChrissCod/bignetwoRk/issues
