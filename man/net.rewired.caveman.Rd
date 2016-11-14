@@ -2,7 +2,7 @@
 % Please edit documentation in R/net.rewired.caveman.R
 \name{net.rewired.caveman}
 \alias{net.rewired.caveman}
-\title{Rewired caveman network}
+\title{Rewired (Connected) Caveman Network}
 \usage{
 net.rewired.caveman(nc, m, p)
 }
@@ -20,14 +20,14 @@ A list containing the nodes of the network and their respective neighbors.
 Simulate a rewired caveman network of m cliques of size k, and with a link rewiring probability p.
 }
 \details{
-The rewired caveman network is built on the corresponding regular caveman network with m cliques of each has k nodes (Watts 1999). Then the links in this caveman network are rewired with probability p.
+The rewired caveman network is built on the corresponding regular caveman network with m cliques of size k. Then the links in this caveman network are rewired with probability p.
 }
 \examples{
 \dontrun{
 x <- net.rewired.caveman(50, 20, 0.0005)}
 }
 \author{
-Xu Dong, Nazrul Shaihk
+Xu Dong, Nazrul Shaikh
 }
 \references{
 Watts, D. J. Networks, Dynamics, and the Small-World Phenomenon. Amer. J. Soc. 105, 493-527, 1999.

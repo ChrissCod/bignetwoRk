@@ -3,7 +3,6 @@
 #' @description Calculate the mean eccentricity of a graph.
 #' @param g	The input network.
 #' @param p The sampling probability.
-#' @param ncores The number of cores
 #' @details The mean eccentricities of all nodes in graph \emph{g}. Calculates the (estimated) mean eccentricity of graph \emph{g} with a justified error.
 #' @return A real constant.
 #' @author Xu Dong, Nazrul Shaikh.
@@ -12,44 +11,35 @@
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
 #' metric.distance.meanecc(x, 0.01)}
 #' @export
-#' @import igraph
+#' @importFrom igraph graph_from_adj_list
+#' @importFrom igraph eccentricity
 #' @import parallel
 #' @import doParallel
 #' @import foreach
 
-metric.distance.meanecc <- function(g, p, ncores= detectCores() ){
-  if (!ncores%%1==0){
-    stop("Parameter ncores must be integer",call. = FALSE)}
-  else{
+metric.distance.meanecc <- function(g, p){
+  if (!is.list(g)) stop("Parameter 'g' must be a list", call. = FALSE)
+  if (p>=1 | p<=0) stop("Parameter 'p' must be in (0,1)", call. = FALSE)
 
-    if (ncores > detectCores() | ncores < 2)  {
-      stop("Parameter ncores is lower than 2 or exceed number of available cores",
-           call. = FALSE)
-    } else{
-      n <- length(g)
+  g <- simplify(graph_from_adj_list(g, duplicate = FALSE))
 
-      ect <- function (i, n, g) {
+  n <- vcount(g)
 
-        p <- sample(seq(n-1),1)
-
-        xx <- eccentricity(g, p)
-
-        return(xx)
-
-      }
-
-      cl <- makeCluster(ncores)
-      registerDoParallel(cl, cores = ncores)
-      clusterExport(cl = cl, varlist=c("eccentricity"))
-      i <- NULL
-      ECT <- foreach(i = 1:(round(n*p)), .combine=c) %dopar% ect(i, n, g)
-
-      meanecc <- mean(ECT)
-
-      stopCluster(cl)
-
-      meanecc
-
-    }
+  ect <- function (i,n,g) {
+    p <- sample(seq(n-1),1)
+    xx <- eccentricity(g,p)
+    return(xx)
   }
+
+  cl <- makeCluster(detectCores())
+  registerDoParallel(cl, cores = detectCores())
+  clusterExport(cl=cl, varlist=c("eccentricity"), envir = environment())
+  i <- NULL
+  ECT <- foreach(i = 1:(round(n*p)), .combine=c) %dopar% ect(i,n,g)
+
+  meanecc <- mean(ECT)
+
+  stopCluster(cl)
+
+  meanecc
 }

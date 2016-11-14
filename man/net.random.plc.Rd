@@ -2,7 +2,7 @@
 % Please edit documentation in R/net.random.plc.R
 \name{net.random.plc}
 \alias{net.random.plc}
-\title{Random network with power-law degree distribution with cutoff}
+\title{Random Network with a Power-law Degree Distribution that Has An Exponential Cutoff}
 \usage{
 net.random.plc(n, cutoff, exponent)
 }
@@ -17,10 +17,10 @@ net.random.plc(n, cutoff, exponent)
 A list containing the nodes of the network and their respective neighbors.
 }
 \description{
-Simulate a random network with a power-law degree distribution, according to Newman et al. (2001).
+Simulate a random network with a power-law degree distribution that has an exponential cutoff, according to Newman et al. (2001).
 }
 \details{
-This random network has a power-law degree distribution with an exponential degree cutoff.
+The generated random network has a power-law degree distribution with an exponential degree cutoff.
 }
 \examples{
 \dontrun{

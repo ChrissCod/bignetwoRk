@@ -15,6 +15,9 @@
 
 
 net.holme.kim <- function( n, m, pt ){
+  if (n<0 | n%%1!=0) stop("Parameter 'n' must be positive integer", call. = FALSE)
+  if (m<1 | m%%1!=0) stop("Parameter 'm' must be integer  greater than 1", call. = FALSE)
+  if (pt<0 | pt>1) stop("Parameter 'pt' must be in (0,1)", call. = FALSE)
 
   neilist <- list()
   neilist[n] <- list(NULL)

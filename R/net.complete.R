@@ -17,12 +17,13 @@
 
 
 net.complete = function(n, ncores = detectCores()){
+  if (n<=0 | n%%1!=0) stop("Parameter 'n' must be a non negative integer", call. = FALSE)
   if (!ncores%%1==0){
-    stop("Parameter ncores must be integer",call. = FALSE)}
+    stop("Parameter 'ncores' must be integer",call. = FALSE)}
   else{
 
     if (ncores > detectCores() | ncores < 2)  {
-      stop("Parameter ncores is lower than 2 or exceed number of available cores",
+      stop("Parameter 'ncores' is lower than 2 or exceed number of available cores",
            call. = FALSE)
     }
     else{

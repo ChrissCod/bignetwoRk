@@ -12,9 +12,6 @@
 #' @export
 
 metric.degree.mean <- function(g) {
-
-  mean.degree <- mean(lengths(g))
-
-  mean.degree
-
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
+  mean(lengths(g))
 }

@@ -11,7 +11,7 @@
 #' @export
 
 metric.degree.max <- function(g) {
-  max.degree <- max(lengths(g))
-  max.degree
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
+  max(lengths(g))
 }
 

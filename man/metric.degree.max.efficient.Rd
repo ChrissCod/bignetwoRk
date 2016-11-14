@@ -16,7 +16,7 @@ A real constant.
 Calculate the efficient maximal degree of a graph.
 }
 \details{
-The efficient maximal degree is the 90\\% quantile of the degrees of all nodes in graph g.
+The efficient maximal degree is the 90% quantile of the degrees of all nodes in graph g.
 }
 \examples{
 \dontrun{x <-  net.erdos.renyi.gnp(1000, 0.01)

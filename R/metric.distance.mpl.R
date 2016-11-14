@@ -4,14 +4,14 @@
 #' @param Network The input network.
 #' @param probability The confidence level probability
 #' @param error The sampling error
-#' @param Cores Number of cores to use in the computations
+#' @param Cores Number of cores to use in the computations. By default \emph{parallel} function \code{detecCores()}.
 #' @param full  It calculates the sampling version by default. If it is set to true, the population MPL will be calculated and the rest of the parameters will be ignored.
 #' @details The median path length (MPL) is the median shortest path lengths of all pairs of nodes in \emph{Network}. \emph{metric.distance.mpl(g)} calculates the population MPL OR estimated MPL of network g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
 #' @return A real integer
 #' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
 #' ##Default function
-#' x <-  net.er.gnp(1000,0.01)
+#' x <-  net.erdos.renyi.gnp(1000,0.01)
 #' metric.distance.mpl(x)
 #' ##Population MPL
 #' metric.distance.mpl(x, full=TRUE)
@@ -29,7 +29,13 @@
 
 
 metric.distance.mpl <-  function(Network,probability=0.95,error=0.03,
-                                 Cores=1, full=FALSE){
+                                 Cores=detectCores(), full=FALSE){
+
+  if (!is.list(Network)) stop("Parameter 'Network' must be a list",call. = FALSE)
+  if (probability>=1 | probability<=0) stop("Parameter 'probability' must be in (0,1)",call. = FALSE)
+  if (error>=1 | error<=0) stop("Parameter 'error' must be in (0,1)",call. = FALSE)
+  if (Cores <= 0 | Cores > detectCores() | Cores%%1!=0) stop("Parameter 'Cores' must be a positive integer greater than one and less than available cores",call. = FALSE)
+  if (!is.logical(full)) stop("Parameter 'full' must be logical",call. = FALSE)
 
   ##//Inner function SPL by edeges
 
@@ -109,7 +115,7 @@ metric.distance.mpl <-  function(Network,probability=0.95,error=0.03,
     S[[i]] <- S1[s1[i]:(s1[i+1]-1),]
   }
   cl <- makeCluster(Cores)
-  registerDoParallel(cl, cores <- Cores)
+  registerDoParallel(cl, cores = Cores)
   v <- parLapply(cl=cl,S,Shortest.path.big,network=Network)
   stopCluster(cl)
   v <- stats::sd(unlist(v))

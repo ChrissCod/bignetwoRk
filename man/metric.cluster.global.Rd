@@ -9,7 +9,7 @@ metric.cluster.global(Network, node.sample, triplet.sample)
 \arguments{
 \item{Network}{The input network.}
 
-\item{node.sample}{The percentage of nodesto be selected - random sample (0,1).}
+\item{node.sample}{The percentage of nodes to be selected - random sample (0,1).}
 
 \item{triplet.sample}{The number of triplets to explore for each node - random triplets.}
 }
@@ -28,7 +28,7 @@ x <-  net.erdos.renyi.gnp(1000, 0.01)
 metric.cluster.global(x, 0.001,2)}
 }
 \author{
-Xu Dong, Nazrul Shaikh.
+Luis Castro, Nazrul Shaikh.
 }
 \references{
 Wasserman, Stanley, and Katherine Faust. Social network analysis: Methods and applications. Vol. 8. Cambridge university press, 1994.

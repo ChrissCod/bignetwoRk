@@ -2,12 +2,12 @@
 % Please edit documentation in R/net.ring.lattice.R
 \name{net.ring.lattice}
 \alias{net.ring.lattice}
-\title{k - regular ring lattice}
+\title{\emph{k} - regular ring lattice}
 \usage{
 net.ring.lattice(n, k)
 }
 \arguments{
-\item{n}{Number of nodes of the network.}
+\item{n}{Number of nodes in the network.}
 
 \item{k}{Number of edges per node.}
 }
@@ -22,10 +22,10 @@ The \emph{n} nodes are placed on a circle and each node is connected to the near
 }
 \examples{
 \dontrun{
-g <- net.ring.lattice(1000, 10)}
+x <- net.ring.lattice(1000, 10)}
 }
 \author{
-Xu Dong
+Xu Dong, Nazrul Shaikh
 }
 \references{
 Duncan J Watts and Steven H Strogatz: Collective dynamics of 'small world' networks, Nature 393, 440-442, 1998.

@@ -15,6 +15,7 @@
 #'
 
 metric.eigen.median <- function (g) {
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
 
   ig <- simplify(as.undirected(graph_from_adj_list(g)))
 

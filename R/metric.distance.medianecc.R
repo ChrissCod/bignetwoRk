@@ -18,28 +18,29 @@
 
 metric.distance.medianecc <- function(g,p){
 
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
+  if (p>=1 | p<=0) stop("Parameter 'probability' must be in (0,1)",call. = FALSE)
+
   n <- length(g)
 
+  g <- simplify(graph_from_adj_list(g, duplicate = FALSE))
+
+  n <- vcount(g)
+
   ect <- function (i,n,g) {
-
     p <- sample(seq(n-1),1)
-
     xx <- eccentricity(g,p)
-
     return(xx)
-
   }
 
   cl <- makeCluster(detectCores())
   registerDoParallel(cl, cores = detectCores())
-  clusterExport(cl=cl, varlist=c("eccentricity"))
-  i<-NULL
+  clusterExport(cl=cl, varlist=c("eccentricity"), envir = environment())
+  i <- NULL
   ECT <- foreach(i = 1:(round(n*p)), .combine=c) %dopar% ect(i,n,g)
 
-  medianecc <- stats::median(ECT)
-
+  medianecc <- mean(ECT)
   stopCluster(cl)
-
   medianecc
 
 }

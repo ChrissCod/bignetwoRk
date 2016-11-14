@@ -2,7 +2,7 @@
 % Please edit documentation in R/net.caveman.R
 \name{net.caveman}
 \alias{net.caveman}
-\title{Caveman network}
+\title{Caveman Network}
 \usage{
 net.caveman(m, k, ncores = detectCores())
 }

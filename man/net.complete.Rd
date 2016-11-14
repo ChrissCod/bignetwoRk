@@ -2,7 +2,7 @@
 % Please edit documentation in R/net.complete.R
 \name{net.complete}
 \alias{net.complete}
-\title{Complete network}
+\title{Complete Network}
 \usage{
 net.complete(n, ncores = detectCores())
 }

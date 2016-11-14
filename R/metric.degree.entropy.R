@@ -10,19 +10,18 @@
 #' @examples \dontrun{
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
 #' metric.degree.entropy(x)}
-#' @importFrom plyr count
 #' @export
 #'
 
 metric.degree.entropy <- function(g) {
 
-  mdf <- count(lengths(g))
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
 
-  p <- mdf[[2]]/sum(mdf[[2]])
+  mdf <- as.numeric(table(lengths(g)))
 
-  h <- sapply(p, function(i) i*log(i,base = 2)    )
+  p <- mdf/sum(mdf) # denominator always equals to number of nodes
 
-  H <- -sum(h)
+  H <- -sum(p*log(p,2))
 
   H
 

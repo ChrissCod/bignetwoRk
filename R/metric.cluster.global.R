@@ -16,7 +16,11 @@
 #' @import parallel
 #' @import doParallel
 
-metric.cluster.global <- function(Network,node.sample, triplet.sample){
+metric.cluster.global <- function(Network, node.sample, triplet.sample){
+
+  if (!is.list(Network)) stop("Parameter 'Network' must be a list",call. = FALSE)
+  if (triplet.sample%%1!=0 | triplet.sample <0)  stop("Parameter 'triplet.sample' must be a non negative integer",call. = FALSE)
+  if (node.sample<=0 | node.sample>=1) stop("Parameter 'node.sample' must be in ]0,1[",call. = FALSE)
 
   Cores <- detectCores()
 

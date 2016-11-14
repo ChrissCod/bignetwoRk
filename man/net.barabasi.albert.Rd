@@ -2,9 +2,9 @@
 % Please edit documentation in R/net.barabasi.albert.R
 \name{net.barabasi.albert}
 \alias{net.barabasi.albert}
-\title{Barabasi-Albert scale-free graph}
+\title{Barabasi-Albert Scale-free Graph}
 \usage{
-net.barabasi.albert(n, m, ncores = detectCores(), d = TRUE)
+net.barabasi.albert(n, m, ncores = detectCores(), d = FALSE)
 }
 \arguments{
 \item{n}{Number of nodes of the network.}
@@ -13,7 +13,7 @@ net.barabasi.albert(n, m, ncores = detectCores(), d = TRUE)
 
 \item{ncores}{Number of cores, by default \code{detectCores()} from \code{parallel}.}
 
-\item{d}{A logical value determining whether is a network directed (default) or indirected.}
+\item{d}{A logical value determining whether the generated network is a directed or undirected (default) network.}
 }
 \value{
 A list containing the nodes of the network and their respective neighbors.
@@ -22,14 +22,14 @@ A list containing the nodes of the network and their respective neighbors.
 Simulate a scale-free network using a preferential attachment mechanism (Barabasi and Albert, 1999)
 }
 \details{
-...
+Starting with \emph{m} nodes, the preferential attachment mechaism adds one node and \emph{m} edges in each step. The edges will be placed with one end on the newly-added node and the other end on the existing nodes, according to probabilities that associate with their current degrees.
 }
 \examples{
 \dontrun{
 x <- net.barabasi.albert(1000, 20) # using default ncores }
 }
 \author{
-Luis Castro, Nazrul Shaikh.
+Luis Castro, Xu Dong, Nazrul Shaikh.
 }
 \references{
 Barabasi, A.- L. and Albert R. 1999. Emergence of scaling in random networks. Science, 286 509-512.

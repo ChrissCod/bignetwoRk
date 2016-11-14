@@ -4,14 +4,12 @@
 \alias{metric.distance.meanecc}
 \title{Mean Eccentricity}
 \usage{
-metric.distance.meanecc(g, p, ncores = detectCores())
+metric.distance.meanecc(g, p)
 }
 \arguments{
 \item{g}{The input network.}
 
-\item{p}{The confidence level probability.}
-
-\item{ncores}{The number of cores}
+\item{p}{The sampling probability.}
 }
 \value{
 A real constant.

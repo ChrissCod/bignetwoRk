@@ -8,7 +8,7 @@
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
-#' g <- net.small.world(1000, 10, 0.05)}
+#' x <- net.small.world(1000, 10, 0.05)}
 #' @import parallel
 #' @import doParallel
 #' @export
@@ -16,6 +16,11 @@
 
 
 net.small.world <- function(n, k, re){
+  if (n<0 | n%%1!=0) stop("Parameter 'n' must be positive integer",call. = FALSE)
+  if (k<=1 | k%%1!=0) stop("Parameter 'k' must be integer greater than 1",call. = FALSE)
+  if (re<=0 | re>=1) stop("Parameter 're' must be in (0,1)",call. = FALSE)
+
+
 
   ## cores: number of cores to be used
   cores <- detectCores()
@@ -60,7 +65,7 @@ net.small.world <- function(n, k, re){
 
   RewireLattice <- parLapply(cl = cl, NIDList, LinkRewire, n, HalfDeg, re)
 
-  stopCluster(cl)
+  #stopCluster(cl)
 
   #########################
   ## reverse links ############

@@ -14,7 +14,9 @@
 #' @references Newman, Mark EJ, Steven H. Strogatz, and Duncan J. Watts. "Random graphs with arbitrary degree distributions and their applications." Physical review E 64, no. 2 (2001): 026118.
 
 net.random.plc <- function(n, cutoff, exponent){
-
+  if (n<0 | n%%1!=0) stop("Parameter 'n' must be positive integer", call. = FALSE)
+  if (cutoff<0) stop("Parameter 'cutoff' must be positive", call. = FALSE)
+  if (exponent<0 | exponent%%1!=0) stop("Parameter 'exponent' must be positive integer", call. = FALSE)
   ##//Generate Degree Distribution//##
 
   Li_Tau <- function(x, tau){

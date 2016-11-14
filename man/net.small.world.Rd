@@ -2,7 +2,7 @@
 % Please edit documentation in R/net.small.world.R
 \name{net.small.world}
 \alias{net.small.world}
-\title{Watts-Strogatz small-world network}
+\title{Watts-Strogatz Small-world Network}
 \usage{
 net.small.world(n, k, re)
 }
@@ -17,17 +17,17 @@ net.small.world(n, k, re)
 A list containing the nodes of the network and their respective neighbors.
 }
 \description{
-Simulate a network according to the model of Watts and Strogatz (1998).
+Simulate a small-world network according to the model of Watts and Strogatz (1998).
 }
 \details{
-The formation of the network starts with a ring lattice with \emph{n} nodes and \emph{k} edges per node, then each edge is rewired at random with probability \emph{re}.
+The formation of Watts-Strogatz network starts with a ring lattice with \emph{n} nodes and \emph{k} edges per node, then each edge is rewired at random with probability \emph{re}.
 }
 \examples{
 \dontrun{
-g <- net.small.world(1000, 10, 0.05)}
+x <- net.small.world(1000, 10, 0.05)}
 }
 \author{
-Xu Dong
+Xu Dong, Nazrul Shaikh
 }
 \references{
 Duncan J. Watts and Steven H. Strogatz: Collective dynamics of 'small world' networks, Nature 393, 440-442, 1998.

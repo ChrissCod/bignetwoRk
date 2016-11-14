@@ -9,13 +9,13 @@ metric.distance.medianecc(g, p)
 \arguments{
 \item{g}{The input network.}
 
-\item{p}{The confidence level probability.}
+\item{p}{The sampling probability.}
 }
 \value{
 A real constant.
 }
 \description{
-Calculate the median eccentricity of a graph.
+Calculate the (estimated) median eccentricity of a graph.
 }
 \details{
 The median eccentricity is the median eccentricities of all nodes in graph \emph{g}. metric.distance.medianecc calculates the (estimated) median eccentricity of graph g with a justified error.

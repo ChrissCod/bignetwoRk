@@ -7,7 +7,7 @@
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
-#' g <- net.ring.lattice(1000, 10)}
+#' x <- net.ring.lattice(1000, 10)}
 #' @import parallel
 #' @import doParallel
 #' @export
@@ -15,6 +15,8 @@
 
 
 net.ring.lattice <- function(n, k){
+  if (n<0 | n%%1!=0) stop("Parameter 'n' must be positive integer",call. = FALSE)
+  if (k<=1 | k%%1!=0) stop("Parameter 'k' must be integer greater than 1",call. = FALSE)
 
   ## cores: number of cores to be used
   cores <- detectCores()

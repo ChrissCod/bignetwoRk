@@ -4,31 +4,40 @@
 #' @param Network The input network.
 #' @param probability The confidence level probability
 #' @param error The sampling error
-#' @param Cores Number of cores to use in the computations
-#' @param full It will calculate the popular full version by default. If it is set to FALSE, the estimated diameter will be calculated.
-#' @details The diameter is the largest shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated) diameter of graph \emph{Network} with a justified error.
-#' @return A real network
+#' @param Cores Number of cores to use in the computations. By default uses \emph{parallel} function \code{detecCores()}.
+#' @param full It will calculate the popular full version by default.
+#' If it is set to FALSE, the estimated diameter will be calculated.
+#' @details The diameter is the largest shortest path lengths of all pairs of nodes in
+#' graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated)
+#' diameter of graph \emph{Network} with a justified error.
+#' @return A real value.
 #' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
 #' ##Default function
-#' x <-  net.er.gnp(1000,0.01)
+#' x <-  net.erdos.renyi.gnp(1000,0.01)
 #' metric.distance.diameter(x)
 #' ##Population APL
-#' metric.distance.diameter(x, full.apl=TRUE)
-#'##Sampling at 99% level with an error of 10% using 5 cores
-#'metric.distance.diameter(Network = x, probability=0.99, error=0.1, Cores=5)
+#' metric.distance.diameter(x, full=TRUE)
+#' ##Sampling at 99% level with an error of 10% using 5 cores
+#' metric.distance.diameter(Network = x, probability=0.99, error=0.1, Cores=5)
 #'}
 #'
 #' @import parallel
 #' @import doParallel
 #' @import foreach
 #' @export
-#' @references Dijkstra EW. A note on two problems in connexion with graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
-#' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
+#' @references Dijkstra EW. A note on two problems in connexion with
+#' graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
+#' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social
+#' Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
 
 metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
                                  Cores=detectCores(), full=TRUE){
-
+  if (!is.list(Network)) stop("Parameter 'Network' must be a list",call. = FALSE)
+  if (probability>=1 | probability<=0) stop("Parameter 'probability' must be in (0,1)",call. = FALSE)
+  if (error>=1 | error<=0) stop("Parameter 'error' must be in (0,1)",call. = FALSE)
+  if (Cores <= 0 | Cores > detectCores() | Cores%%1!=0) stop("Parameter 'Cores' must be a positive integer greater than one and less than available cores",call. = FALSE)
+  if (!is.logical(full)) stop("Parameter 'full' must be logical",call. = FALSE)
 
   ##//Inner function SPL by edeges
 
@@ -108,7 +117,7 @@ metric.distance.diameter <-  function(Network,probability=0.95,error=0.03,
     S[[i]] <- S1[s1[i]:(s1[i+1]-1),]
   }
   cl <- makeCluster(Cores)
-  registerDoParallel(cl, cores <- Cores)
+  registerDoParallel(cl, cores = Cores)
   v <- parLapply(cl=cl,S,Shortest.path.big,network=Network)
   stopCluster(cl)
   v <- stats::sd(unlist(v))

@@ -13,8 +13,8 @@
 
 metric.degree.median <- function(g) {
 
-median.degree <- stats::median(lengths(g))
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
 
-median.degree
+  stats::median(lengths(g))
 
 }

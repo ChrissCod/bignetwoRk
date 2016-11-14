@@ -2,16 +2,22 @@
 #'
 #' @description Calculate the average path length of a graph.
 #' @param Network The input network.
-#' @param probability The confidence level probability
-#' @param error The sampling error
-#' @param Cores Number of cores to use in the computations
-#' @param full.apl  It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.
-#' @details The average path length (APL) is the average shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.apl} calculates the population APL and estimated APL of graph g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
-#' @return A real network
+#' @param probability The confidence level probability.
+#' @param error The sampling error.
+#' @param Cores Number of cores to use in the computations. By default uses \emph{parallel} function \code{detecCores()}.
+#' @param full.apl  It will calculate the sampling version by default. If it is set to true,
+#' the population APL will be calculated and the rest of the parameters will be ignored.
+#' @details The average path length (APL) is the average shortest path lengths of all
+#' pairs of nodes in graph \emph{Network}. \code{metric.distance.apl} calculates
+#' the population APL and estimated APL of graph g with a sampling error set by the user.
+#'
+#' The calculation uses a parallel load balancing approach,
+#' distributing jobs equally among the cores defined by the user.
+#' @return A real value.
 #' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
 #' ##Default function
-#' x <-  net.er.gnp(1000,0.01)
+#' x <-  net.erdos.renyi.gnp(1000,0.01)
 #' metric.distance.apl(x)
 #' ##Population APL
 #' metric.distance.apl(x, full.apl=TRUE)
@@ -23,16 +29,24 @@
 #' @import doParallel
 #' @import foreach
 #' @export
-#' @references Dijkstra EW. A note on two problems in connexion with graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
-#' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
+#' @references Dijkstra EW. A note on two problems in connexion with
+#' graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
+#' @references Castro L, Shaikh N. Estimation of Average Path Lengths
+#' of Social Networks via Random Node Pair Sampling.
+#' Department of Industrial Engineering, University of Miami. 2016.
 
 
 
 metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
-                              Cores=1, full.apl=FALSE){
+                              Cores=detectCores(), full.apl=FALSE){
 
+  if (!is.list(Network)) stop("Parameter 'Network' must be a list",call. = FALSE)
+  if (probability>=1 | probability<=0) stop("Parameter 'probability' must be in (0,1)",call. = FALSE)
+  if (error>1 | error<0) stop("Parameter 'error' must be in [0,1]",call. = FALSE)
+  if (Cores <= 0 | Cores > detectCores() | Cores%%1!=0) stop("Parameter 'Cores' must be a positive integer number greater than one and less available cores",call. = FALSE)
+  if (!is.logical(full.apl)) stop("Parameter 'full.ap' must be logical",call. = FALSE)
+    ##//Inner function SPL by edeges
 
-  ##//Inner function SPL by edeges
 
   Shortest.path.big <- function(matrix.edges,network){
 
@@ -87,7 +101,6 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
     }
 
     output <- apply(matrix.edges,1,Shortest.path.int,Network=network)
-    #output <- lapply(list.edges,Shortest.path.int,Network=network)
 
     output
 
@@ -98,9 +111,8 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
 
   #Get 1000 of SP for st dev calculation for sampling
   N <- length(Network)
-  #s <- round(min(N*(N-1)*0.001)/Cores,N)*Cores
   s <- round(1000/Cores)*Cores
-  x= array(seq(N))
+  x <- array(seq(N))
   S1 <- matrix(nrow=s,ncol=2)
   s1 <- sample(x,s,replace=TRUE); S1[,1] <- s1
   s1 <- sample(x,s,replace=TRUE); S1[,2] <- s1

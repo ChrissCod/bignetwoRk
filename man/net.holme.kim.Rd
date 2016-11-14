@@ -2,7 +2,7 @@
 % Please edit documentation in R/net.holme.kim.R
 \name{net.holme.kim}
 \alias{net.holme.kim}
-\title{Holme-Kim network}
+\title{Holme-Kim Network}
 \usage{
 net.holme.kim(n, m, pt)
 }
@@ -17,17 +17,17 @@ net.holme.kim(n, m, pt)
 A list containing the nodes of the network and their respective neighbors.
 }
 \description{
-Simulate a scale-free network, including a "triad formation" step that compensate the low clustering in B-A networks (Holme and Kim, 1999).
+Simulate a scale-free network with relatively high clustering, comparing to B-A networks (Holme and Kim, 1999).
 }
 \details{
-The Holme-Kim network model is a simple extension of B-A model. It adds an additional step, called "Triad formation", with the probability pt that compensate the low clustering in B-A networks.
+The Holme-Kim network model is a simple extension of B-A model. It adds an additional step, called "Triad formation", with the probability \emph{pt} that compensates the low clustering in B-A networks.
 }
 \examples{
 \dontrun{
 x <- net.holme.kim (1000, 20, 0.1)}
 }
 \author{
-Xu Dong, Nazrul Shaihk
+Xu Dong, Nazrul Shaikh
 }
 \references{
 Holme, Petter, and Beom Jun Kim. "Growing scale-free networks with tunable clustering."Physical review E65, no. 2 (2002): 026107.

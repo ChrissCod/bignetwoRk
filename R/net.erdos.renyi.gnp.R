@@ -19,13 +19,14 @@
 
 
 net.erdos.renyi.gnp <- function(n, p, ncores = detectCores(), d = TRUE){
-
+  if (n<0 | n%%1!=0) stop("Parameter 'n' must be postive integer",call. = FALSE)
+  if (p<=0 | p>=1) stop("Parameter 'p' must be in (0,1)",call. = FALSE)
   if (!ncores%%1==0){
-    stop("Parameter ncores must be integer",call. = FALSE)}
+    stop("Parameter 'ncores' must be integer",call. = FALSE)}
   else{
 
     if (ncores > detectCores() | ncores < 2)  {
-      stop("Parameter ncores is lower than 2 or exceed number of available cores",
+      stop("Parameter 'ncores' is lower than 2 or exceed number of available cores",
            call. = FALSE)
     }else
     {

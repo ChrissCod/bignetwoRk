@@ -5,7 +5,7 @@
 \title{Diameter}
 \usage{
 metric.distance.diameter(Network, probability = 0.95, error = 0.03,
-  Cores = 1, full.apl = FALSE)
+  Cores = detectCores(), full = TRUE)
 }
 \arguments{
 \item{Network}{The input network.}
@@ -14,37 +14,42 @@ metric.distance.diameter(Network, probability = 0.95, error = 0.03,
 
 \item{error}{The sampling error}
 
-\item{Cores}{Number of cores to use in the computations}
+\item{Cores}{Number of cores to use in the computations. By default uses \emph{parallel} function \code{detecCores()}.}
 
-\item{full.apl}{It will calculate the sampling version by default. If it is set to true, the population APL will be calculated and the rest of the parameters will be ignored.}
+\item{full}{It will calculate the popular full version by default.
+If it is set to FALSE, the estimated diameter will be calculated.}
 }
 \value{
-A real network
+A real value.
 }
 \description{
 Calculate the diameter of a graph.
 }
 \details{
-The diameter is the largest shortest path lengths of all pairs of nodes in graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated) diameter of graph \emph{Network} with a justified error.
+The diameter is the largest shortest path lengths of all pairs of nodes in
+graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated)
+diameter of graph \emph{Network} with a justified error.
 }
 \examples{
 \dontrun{
 ##Default function
-x <-  net.er.gnp(1000,0.01)
+x <-  net.erdos.renyi.gnp(1000,0.01)
 metric.distance.diameter(x)
 ##Population APL
-metric.distance.diameter(x, full.apl=TRUE)
+metric.distance.diameter(x, full=TRUE)
 ##Sampling at 99\% level with an error of 10\% using 5 cores
 metric.distance.diameter(Network = x, probability=0.99, error=0.1, Cores=5)
 }
 
 }
 \author{
-Luis Castro, Nazrul Shaihk.
+Luis Castro, Nazrul Shaikh.
 }
 \references{
-Dijkstra EW. A note on two problems in connexion with graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
+Dijkstra EW. A note on two problems in connexion with
+graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
 
-Castro L, Shaikh N. Estimation of Average Path Lengths of Social Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
+Castro L, Shaikh N. Estimation of Average Path Lengths of Social
+Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
 }
 

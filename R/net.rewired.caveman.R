@@ -14,7 +14,9 @@
 #' @export
 #'
 net.rewired.caveman <- function( nc, m, p){
-
+  if (nc<=0 | nc%%1!=0) stop("Parameter 'nc' must be a non negative integer", call. = FALSE)
+  if (m<=0 | m%%1!=0) stop("Parameter 'm' must be a non negative integer", call. = FALSE)
+  if (p<=0 | p>=1) stop("Parameter 'p' must be in (0,1)", call. = FALSE)
   n <- nc*m
 
   pool <- ifelse(stats::runif(nc*(m-1)*m/2)<=p,1,0)

@@ -18,6 +18,9 @@
 
 
 net.caveman <- function(m, k, ncores = detectCores() ){
+  if (m<=0 | m%%1!=0) stop("Parameter 'm' must be a non negative integer", call. = FALSE)
+  if (k<=0 |  k%%1!=0) stop("Parameter 'k' must be a non negative integer", call. = FALSE)
+
   if (!ncores%%1==0){
     stop("Parameter ncores must be integer",call. = FALSE)}
   else{

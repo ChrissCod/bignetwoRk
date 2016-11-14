@@ -11,6 +11,7 @@
 #' @export
 
 metric.graph.density <- function (g) {
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
   n <- length(g)
   density <- sum(lengths(g))/(n*(n-1))
   density
