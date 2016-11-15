@@ -71,16 +71,40 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
         neilist <- list()
         neilist[n] <- list(NULL)
 
-        pool <- sample( seq(n*(n-1)/2),m )
+        pool <- sample.int( n*(n-1)/2,m )
 
-        for (i in 1:(n-1)) {
+        # for (i in 1:(n-1)) {
+        #
+        #   # neilist[[i]] <- intersect(pool,seq(  (n*(n-1)-(n-i-1)*(n-i))/2-(n-i-1) ,  (n*(n-1)-(n-i-1)*(n-i))/2   ))+i-((n-1)+(n-i+1))*(i-1)/2
+        #   neilist[[i]] <- intersect(pool,seq( i*n-0.5*i^2+0.5*i+1-n, i*n-0.5*i^2-0.5*i ))+i-n*i+n+0.5*i^2-0.5*i
+        # }
 
-          neilist[[i]] <- intersect(pool,seq(  (n*(n-1)-(n-i-1)*(n-i))/2-(n-i-1) ,  (n*(n-1)-(n-i-1)*(n-i))/2   ))+i-((n-1)+(n-i+1))*(i-1)/2
+        connect <- function(j){
+
+          neilist.raw <- list()
+          neilist.raw[n] <- list(NULL)
+
+          for (i in seq(j,(n-1),ncores)  ){
+
+
+            neilist.raw[[i]] <- intersect(pool,seq( i*n-0.5*i^2+0.5*i+1-n, i*n-0.5*i^2-0.5*i ))+i-n*i+n+0.5*i^2-0.5*i
+
+          }
+
+          neilist.raw
 
         }
 
+
         cl <- makeCluster(ncores)   ##Make cluster of cores
         registerDoParallel(cl, cores = ncores)
+
+        cfun <- function(a,b){
+          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
+          cc
+        }
+
+        neilist <- foreach(j = 1:ncores, .combine='cfun') %dopar% connect(j)
 
         reverse.connect <- function(i){
 
@@ -101,20 +125,15 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
 
         }
 
-        cfun <- function(a,b){
-          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
-          cc
-        }
-
         reverselist <- foreach(i = 1:ncores, .combine='cfun') %dopar% reverse.connect(i)
 
         Network <- mapply(c,neilist,reverselist, SIMPLIFY=FALSE)
         stopCluster(cl)
         Network
 
-
-
       }
     }
   }
-  }
+}
+
+
