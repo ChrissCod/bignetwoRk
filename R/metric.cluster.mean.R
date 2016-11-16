@@ -8,8 +8,8 @@
 #' @author Xu Dong, Nazrul Shaikh.
 #' @references Wasserman, Stanley, and Katherine Faust. Social network analysis: Methods and applications. Vol. 8. Cambridge university press, 1994.
 #' @examples \dontrun{
-#' x <-  net.erdos.renyi.gnp(1000, 0.01)
-#' metric.cluster.mean(x)}
+#' x <-  net.erdos.renyi.gnp(n = 1000, ncores = 3, p =  0.06)
+#' metric.cluster.mean(x) }
 #' @export
 #' @importFrom igraph as.undirected
 #' @importFrom igraph graph_from_adj_list

@@ -31,6 +31,7 @@ net.barabasi.albert <- function(n, m, ncores = detectCores(), d = FALSE ){
     } else{
       if (d == TRUE){
         cl <- makeCluster(ncores)  ##Make cluster of cores
+        on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
 
         ##M0 graph
@@ -69,8 +70,6 @@ net.barabasi.albert <- function(n, m, ncores = detectCores(), d = FALSE ){
           n.init <- c(n.init, i)
           }
 
-        print(paste("Used",length(cl), "clusters."))
-        stopCluster(cl)
         Net1
       }
 
@@ -95,7 +94,8 @@ net.barabasi.albert <- function(n, m, ncores = detectCores(), d = FALSE ){
 
         }
 
-        cl <- makeCluster(ncores)                     ##Make cluster of cores
+        cl <- makeCluster(ncores) ##Make cluster of cores
+        on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
 
         reverse.connect = function(i){
@@ -122,10 +122,9 @@ net.barabasi.albert <- function(n, m, ncores = detectCores(), d = FALSE ){
           cc
         }
 
+        i <- NULL
         reverselist <- foreach(i = 1:ncores, .combine='cfun') %dopar% reverse.connect(i)
-
         Network <- mapply(c,neilist,reverselist, SIMPLIFY=FALSE)
-        stopCluster(cl)
         Network
       }
     }

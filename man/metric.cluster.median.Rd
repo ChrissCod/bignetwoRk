@@ -20,7 +20,7 @@ The local clustering coefficient of a node is the ratio of the triangles connect
 }
 \examples{
 \dontrun{
-x <-  net.erdos.renyi.gnp(1000, 0.01)
+x <-  net.erdos.renyi.gnp(1000, 0.1)
 metric.cluster.median(x)}
 }
 \author{

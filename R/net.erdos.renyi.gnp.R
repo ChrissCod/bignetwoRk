@@ -33,6 +33,7 @@ net.erdos.renyi.gnp <- function(n, p, ncores = detectCores(), d = TRUE){
       if (d == TRUE){
         node <- rep(n, n)
         cl <- makeCluster(ncores)
+        on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
         RG <- function(nodes, prob){
          n <- stats::rbinom(nodes, 1, p)
@@ -40,7 +41,6 @@ net.erdos.renyi.gnp <- function(n, p, ncores = detectCores(), d = TRUE){
         }
 
         Network <- parLapply(cl = cl, node, RG, prob=p)
-        stopCluster(cl)
         Network
       }
 
@@ -59,7 +59,8 @@ net.erdos.renyi.gnp <- function(n, p, ncores = detectCores(), d = TRUE){
 
         }
 
-        cl <- makeCluster(Cores)                     ##Make cluster of cores
+        cl <- makeCluster(Cores) ##Make cluster of cores
+        on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = Cores)
 
         reverse.connect <- function(i){
@@ -90,7 +91,6 @@ net.erdos.renyi.gnp <- function(n, p, ncores = detectCores(), d = TRUE){
         reverselist <- foreach(i = 1:Cores, .combine='cfun') %dopar% reverse.connect(i)
 
         Network <- mapply(c,neilist,reverselist, SIMPLIFY=FALSE)
-        stopCluster(cl)
         Network
 
         }

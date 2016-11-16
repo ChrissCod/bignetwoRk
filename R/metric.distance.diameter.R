@@ -8,8 +8,10 @@
 #' @param full It will calculate the popular full version by default.
 #' If it is set to FALSE, the estimated diameter will be calculated.
 #' @details The diameter is the largest shortest path lengths of all pairs of nodes in
-#' graph \emph{Network}. \code{metric.distance.diameter} calculates the (estimated)
-#' diameter of graph \emph{Network} with a justified error.
+#' graph \emph{Network}.
+#'
+#' \code{metric.distance.diameter} calculates the (estimated) diameter
+#' of graph \emph{Network} with a justified error.
 #' @return A real value.
 #' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
@@ -26,8 +28,7 @@
 #' @import doParallel
 #' @import foreach
 #' @export
-#' @references Dijkstra EW. A note on two problems in connexion with
-#' graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
+#' @references E. W. Dijkstra. 1959. A note on two problems in connexion with graphs. Numer. Math. 1, 1 (December 1959), 269-271.
 #' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social
 #' Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
 

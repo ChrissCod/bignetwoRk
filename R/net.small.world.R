@@ -43,6 +43,7 @@ net.small.world <- function(n, k, re){
   }
 
   cl <- makeCluster(cores)
+  on.exit(stopCluster(cl))
   registerDoParallel(cl, cores = cores)
 
   ## First Parallel loop ##
@@ -94,7 +95,6 @@ net.small.world <- function(n, k, re){
   ######################################
 
   OUTPUT <- mapply(c, RewireLattice, LinkRow, SIMPLIFY = FALSE)
-  stopCluster(cl)
   OUTPUT
 
 }

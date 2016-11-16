@@ -11,7 +11,8 @@
 #' @references Wasserman, Stanley, and Katherine Faust. Social network analysis: Methods and applications. Vol. 8. Cambridge university press, 1994.
 #' @examples \dontrun{
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
-#' metric.cluster.global(x, 0.001,2)}
+#' metric.cluster.global(x, 0.001, 2) }
+#'
 #' @export
 #' @import parallel
 #' @import doParallel
@@ -19,8 +20,8 @@
 metric.cluster.global <- function(Network, node.sample, triplet.sample){
 
   if (!is.list(Network)) stop("Parameter 'Network' must be a list",call. = FALSE)
+  if (node.sample<=0 | node.sample>=1) stop("Parameter 'node.sample' must be in (0,1)",call. = FALSE)
   if (triplet.sample%%1!=0 | triplet.sample <0)  stop("Parameter 'triplet.sample' must be a non negative integer",call. = FALSE)
-  if (node.sample<=0 | node.sample>=1) stop("Parameter 'node.sample' must be in ]0,1[",call. = FALSE)
 
   Cores <- detectCores()
 
@@ -76,6 +77,7 @@ metric.cluster.global <- function(Network, node.sample, triplet.sample){
 
   ##Raw inputs from each node
   cl <- makeCluster(Cores)
+  on.exit(stopCluster(cl))
   registerDoParallel(cl, cores = Cores)
   CC <- parLapply(cl,nodes,Vector.triplets, Network=Network, triplet.sample = triplet.sample)
 
@@ -83,12 +85,13 @@ metric.cluster.global <- function(Network, node.sample, triplet.sample){
   elements <- seq(length(CC))
   Close <- parLapply(cl=cl,elements,Extract,pos=1,Network=CC)
   Conn <- parLapply(cl=cl,elements,Extract,pos=2,Network=CC)
-  stopCluster(cl)
+
 
   ##CC results
   Close <- sum(unlist(Close))
   Conn <- sum(unlist(Conn))
   CC <- Close/Conn
   CC
+
 
 }

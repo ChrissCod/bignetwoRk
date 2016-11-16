@@ -13,11 +13,11 @@
 #' @import doParallel
 #' @import foreach
 #' @export
-#' @references ...
+#'
 
 
 net.complete = function(n, ncores = detectCores()){
-  if (n<=0 | n%%1!=0) stop("Parameter 'n' must be a non negative integer", call. = FALSE)
+  if (n<=0 | n%%1!=0 | n>=10000) stop("Parameter 'n' must be a non negative integer. 'n' should excess 10000", call. = FALSE)
   if (!ncores%%1==0){
     stop("Parameter 'ncores' must be integer",call. = FALSE)}
   else{
@@ -31,6 +31,7 @@ net.complete = function(n, ncores = detectCores()){
 
       ## cores: number of cores to be used
       cl <- makeCluster(ncores)
+      on.exit(stopCluster(cl))
       registerDoParallel(cl, cores = ncores)
 
       # NIDList = seq(n)     # List of all Node IDs, from 1 to n
@@ -45,11 +46,9 @@ net.complete = function(n, ncores = detectCores()){
         }
         NeiList
       }
-      i <- NULL # To avoid Warning on "R CMD check"
 
-      # Network <- parLapply(cl = cl,NIDList,NeiConn,n)
+      i <- NULL # To avoid Warning on "R CMD check"
       Network <- foreach(i = 1:ncores, .combine = c) %dopar% NeiConn(i)
-      stopCluster(cl)
       Network
 
     }

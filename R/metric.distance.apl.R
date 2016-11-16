@@ -29,8 +29,7 @@
 #' @import doParallel
 #' @import foreach
 #' @export
-#' @references Dijkstra EW. A note on two problems in connexion with
-#' graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
+#' @references E. W. Dijkstra. 1959. A note on two problems in connexion with graphs. Numer. Math. 1, 1 (December 1959), 269-271.
 #' @references Castro L, Shaikh N. Estimation of Average Path Lengths
 #' of Social Networks via Random Node Pair Sampling.
 #' Department of Industrial Engineering, University of Miami. 2016.
@@ -122,9 +121,9 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
     S[[i]] <- S1[s1[i]:(s1[i+1]-1),]
   }
   cl <- makeCluster(Cores)
-  registerDoParallel(cl, cores <- Cores)
+  on.exit(stopCluster(cl))
+  registerDoParallel(cl, cores = Cores)
   v <- parLapply(cl=cl,S,Shortest.path.big,network=Network)
-  stopCluster(cl)
   v <- stats::sd(unlist(v))
 
   #Final sample size
@@ -134,9 +133,6 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
     d <- 1-probability
     Z <- stats::qnorm(1-d/2)
     s <- round((min(N,(Z*v/error)**2)/Cores))*Cores
-    #print(s)
-    #print(N)
-    #print(length(x))
     S1 <- matrix(nrow=s,ncol=2)
     s1 <- sample(x,s,replace=TRUE); S1[,1] <- s1
     s1 <- sample(x,s,replace=TRUE); S1[,2] <- s1
@@ -150,9 +146,6 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
   #/Full APL
   if (full.apl==TRUE){
     s <- round((N/Cores))*Cores
-    #print(s)
-    #print(N)
-    #print(length(x))
     S1 <- matrix(nrow=s,ncol=2)
     s1 <- sample(x,s,replace=FALSE); S1[,1] <- s1
     s1 <- sample(x,s,replace=FALSE); S1[,2] <- s1
@@ -164,10 +157,10 @@ metric.distance.apl <-  function(Network,probability=0.95,error=0.03,
   }
 
   ##/Parallel processing
-  cl <- makeCluster(Cores)
+  #cl <- makeCluster(Cores)
+  #on.exit(stopCluster(cl))
   registerDoParallel(cl, cores = Cores)
   Paths <- parLapply(cl=cl,S,Shortest.path.big,network=Network)
-  stopCluster(cl)
 
 
   ##/Calculate APL (change here to median/max/min for Cristian!)

@@ -18,7 +18,8 @@ A real constant.
 Calculate the (estimated) median eccentricity of a graph.
 }
 \details{
-The median eccentricity is the median eccentricities of all nodes in graph \emph{g}. metric.distance.medianecc calculates the (estimated) median eccentricity of graph g with a justified error.
+Is the median eccentricities of all nodes in graph \emph{g}.
+\code{metric.distance.medianecc} calculates the (estimated) median eccentricity of graph \emph{g} with a justified error.
 }
 \examples{
 \dontrun{

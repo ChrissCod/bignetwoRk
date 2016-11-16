@@ -9,7 +9,6 @@
 #' @author Xu Dong, Nazrul Shaikh
 #' @examples \dontrun{
 #' x <- net.holme.kim (1000, 20, 0.1)}
-#' @import doParallel
 #' @references Holme, Petter, and Beom Jun Kim. "Growing scale-free networks with tunable clustering."Physical review E65, no. 2 (2002): 026107.
 #' @export
 

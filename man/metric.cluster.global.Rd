@@ -25,7 +25,8 @@ The global clustering coefficient measures the ratio of triples versus the total
 \examples{
 \dontrun{
 x <-  net.erdos.renyi.gnp(1000, 0.01)
-metric.cluster.global(x, 0.001,2)}
+metric.cluster.global(x, 0.001, 2) }
+
 }
 \author{
 Luis Castro, Nazrul Shaikh.

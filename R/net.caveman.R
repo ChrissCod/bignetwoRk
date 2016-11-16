@@ -69,12 +69,12 @@ net.caveman <- function(m, k, ncores = detectCores() ){
 
       }
 
-      cl <- makeCluster(ncores)     ##Make cluster of cores
+      cl <- makeCluster(ncores) ##Make cluster of cores
+      on.exit(stopCluster(cl))
       registerDoParallel(cl,  cores = ncores)
 
       Network <- parLapply(cl = cl, NODEIDS,
                            cave.member.connect, m, k, size)
-      stopCluster(cl)
       Network
     }
   }

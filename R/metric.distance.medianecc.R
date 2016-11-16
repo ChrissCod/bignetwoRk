@@ -3,7 +3,8 @@
 #' @description Calculate the (estimated) median eccentricity of a graph.
 #' @param g	The input network.
 #' @param p The sampling probability.
-#' @details The median eccentricity is the median eccentricities of all nodes in graph \emph{g}. metric.distance.medianecc calculates the (estimated) median eccentricity of graph g with a justified error.
+#' @details Is the median eccentricities of all nodes in graph \emph{g}.
+#' \code{metric.distance.medianecc} calculates the (estimated) median eccentricity of graph \emph{g} with a justified error.
 #' @return A real constant.
 #' @author Xu Dong, Nazrul Shaikh.
 #' @references West, Douglas Brent. Introduction to graph theory. Vol. 2. Upper Saddle River: Prentice hall, 2001.

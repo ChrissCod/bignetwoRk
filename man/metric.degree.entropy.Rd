@@ -16,7 +16,7 @@ A real constant.
 Calculate the degree entropy of a graph.
 }
 \details{
-Calculates the degree entropy of graph g, i.e. \deqn{ntropy(g) = - \sum_{i=1}^{n} i*\log _2(i)}
+Calculates the degree entropy of graph g, i.e. \deqn{Entropy(g) = - \sum_{i=1}^{n} i*\log _2(i)}
 }
 \examples{
 \dontrun{

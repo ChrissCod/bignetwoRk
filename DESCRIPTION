@@ -1,6 +1,6 @@
 Package: bignetwoRk
 Type: Package
-Title: Large-scale Social Network Analysis
+Title: Large-Scale Social Network Analysis
 Version: 0.1.0
 Authors@R: c(
   person("Nazrul", "Shaikh", email = "n.shaikh@miami.edu", role = "aut"),

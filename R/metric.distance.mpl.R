@@ -4,9 +4,10 @@
 #' @param Network The input network.
 #' @param probability The confidence level probability
 #' @param error The sampling error
-#' @param Cores Number of cores to use in the computations. By default \emph{parallel} function \code{detecCores()}.
+#' @param Cores Number of cores to use in the computations. By default \code{detecCores()} from \emph{parallel}.
 #' @param full  It calculates the sampling version by default. If it is set to true, the population MPL will be calculated and the rest of the parameters will be ignored.
-#' @details The median path length (MPL) is the median shortest path lengths of all pairs of nodes in \emph{Network}. \emph{metric.distance.mpl(g)} calculates the population MPL OR estimated MPL of network g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
+#' @details The median path length (MPL) is the median shortest path lengths of all pairs of nodes in \emph{Network}.
+#' \emph{metric.distance.mpl(g)} calculates the population MPL OR estimated MPL of network g with a sampling error set by the user. The calculation uses a parallel load balancing approach, distributing jobs equally among the cores defined by the user.
 #' @return A real integer
 #' @author Luis Castro, Nazrul Shaikh.
 #' @examples \dontrun{
@@ -23,7 +24,7 @@
 #' @import doParallel
 #' @import foreach
 #' @export
-#' @references Dijkstra EW. A note on two problems in connexion with graphs:(numerische mathematik, _1 (1959), p 269-271). 1959.
+#' @references E. W. Dijkstra. 1959. A note on two problems in connexion with graphs. Numer. Math. 1, 1 (December 1959), 269-271.
 #' @references Castro L, Shaikh N. Estimation of Average Path Lengths of Social Networks via Random Node Pair Sampling. Department of Industrial Engineering, University of Miami. 2016.
 
 

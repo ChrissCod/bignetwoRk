@@ -39,11 +39,11 @@ net.ring.lattice <- function(n, k){
   }
 
   cl <- makeCluster(cores)
+  on.exit(stopCluster(cl))
   registerDoParallel(cl, cores = cores)
 
   ## First Parallel loop ##
   Lattice <- parLapply(cl = cl, NIDList, NeiConn, HalfDeg, n)
-  stopCluster(cl)
   Lattice
 
 }
