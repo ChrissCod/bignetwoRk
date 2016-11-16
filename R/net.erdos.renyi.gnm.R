@@ -8,7 +8,7 @@
 #' @details In this (simplest) random network, \emph{m} edges are formed at random among \emph{n} nodes.
 #'When \code{d = TRUE} is a directed network.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Xu Dong, Nazrul Shaihk.
+#' @author Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
 #' x <- net.erdos.renyi.gnm(1000, 100) }
 #' @import parallel
