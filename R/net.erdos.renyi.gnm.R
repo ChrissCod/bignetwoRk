@@ -8,7 +8,7 @@
 #' @details In this (simplest) random network, \emph{m} edges are formed at random among \emph{n} nodes.
 #' When \code{d = TRUE} is a directed network.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Xu Dong, Nazrul Shaihk.
+#' @author Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
 #' x <- net.erdos.renyi.gnm(1000, 10000) }
 #' @import parallel
@@ -67,20 +67,27 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
       }
       else{
 
-        neilist <- list()
-        neilist[n] <- list(NULL)
+        pool <- sample( seq(n*(n-1)/2),m)
+        connect <- function(j){
+          neilist.raw <- list()
+          neilist.raw[n] <- list(NULL)
+          for (i in seq(j,(n-1),ncores)  ){
+              neilist.raw[[i]] <- intersect(pool,seq( i*n-0.5*i^2+0.5*i+1-n, i*n-0.5*i^2-0.5*i ))+i-n*i+n+0.5*i^2-0.5*i
+              }
 
-        pool <- sample( seq(n*(n-1)/2),m )
-
-        for (i in 1:(n-1)) {
-
-          neilist[[i]] <- intersect(pool,seq( (n*(n-1)-(n-i-1)*(n-i))/2-(n-i-1), (n*(n-1)-(n-i-1)*(n-i))/2 ))+i-((n-1)+(n-i+1))*(i-1)/2
-
-        }
+          neilist.raw
+          }
 
         cl <- makeCluster(ncores)   ##Make cluster of cores
         on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
+
+        cfun <- function(a,b){
+          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
+          cc
+        }
+
+        neilist <- foreach(j = 1:ncores, .combine='cfun') %dopar% connect(j)
 
         reverse.connect <- function(i){
 
@@ -99,11 +106,6 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
 
           reverse.neilist
 
-        }
-
-        cfun <- function(a,b){
-          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
-          cc
         }
 
         i <- NULL
