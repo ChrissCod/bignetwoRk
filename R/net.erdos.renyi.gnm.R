@@ -94,6 +94,8 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
           cc
         }
 
+        j <- NULL
+
         neilist <- foreach(j = 1:ncores, .combine='cfun') %dopar% connect(j)
 
         reverse.connect <- function(i){
@@ -114,6 +116,8 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
           reverse.neilist
 
         }
+
+        i <- NULL
 
         reverselist <- foreach(i = 1:ncores, .combine='cfun') %dopar% reverse.connect(i)
 
