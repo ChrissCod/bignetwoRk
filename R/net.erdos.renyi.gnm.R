@@ -6,11 +6,11 @@
 #' @param ncores Number of cores, by default \code{detectCores()} from \code{parallel}.
 #' @param d A logical value determining whether is a network directed (default) or indirected.
 #' @details In this (simplest) random network, \emph{m} edges are formed at random among \emph{n} nodes.
-#' When \code{d = TRUE} is a directed network.
+#'When \code{d = TRUE} is a directed network.
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
-#' x <- net.erdos.renyi.gnm(1000, 10000) }
+#' x <- net.erdos.renyi.gnm(1000, 100) }
 #' @import parallel
 #' @import doParallel
 #' @import foreach
@@ -21,7 +21,6 @@
 net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
   if (n<0 | n%%1!=0) stop("Parameter 'n' must be positive integer",call. = FALSE)
   if (m<=1 | m%%1!=0) stop("Parameter 'm' must be integer greater than 1",call. = FALSE)
-  if (m<n) stop("Parameter 'm' is too small", call. = FALSE)
   if (!ncores%%1==0){
     stop("Parameter 'ncores' must be integer",call. = FALSE)}
   else{
@@ -32,8 +31,11 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
     }
     else{
       if (d == TRUE) {
+        #neilist <- list()
+        #neilist[n] <- list(NULL)
 
         pool <- sample( seq(n*(n-1)),m )
+
         cl <- makeCluster(ncores)
         on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
@@ -60,29 +62,13 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
           cc
         }
 
-        i <- NULL
         Network <- foreach(i = 1:ncores, .combine='cfun') %dopar% edge.to.nei(i)
+
         Network
 
       }
       else{
 
-<<<<<<< HEAD
-        pool <- sample( seq(n*(n-1)/2),m)
-        connect <- function(j){
-          neilist.raw <- list()
-          neilist.raw[n] <- list(NULL)
-          for (i in seq(j,(n-1),ncores)  ){
-              neilist.raw[[i]] <- intersect(pool,seq( i*n-0.5*i^2+0.5*i+1-n, i*n-0.5*i^2-0.5*i ))+i-n*i+n+0.5*i^2-0.5*i
-              }
-
-          neilist.raw
-          }
-
-        cl <- makeCluster(ncores)   ##Make cluster of cores
-        on.exit(stopCluster(cl))
-        registerDoParallel(cl, cores = ncores)
-=======
         pool <- sample.int( n*(n-1)/2,m )
 
         connect <- function(j){
@@ -97,20 +83,13 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
           }
 
           neilist.raw
->>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
 
-        cfun <- function(a,b){
-          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
-          cc
         }
 
-<<<<<<< HEAD
-        neilist <- foreach(j = 1:ncores, .combine='cfun') %dopar% connect(j)
-=======
 
         cl <- makeCluster(ncores)   ##Make cluster of cores
+        on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
->>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
 
         cfun <- function(a,b){
           cc <- mapply(c,a,b, SIMPLIFY=FALSE)
@@ -143,7 +122,9 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
         i <- NULL
 
         reverselist <- foreach(i = 1:ncores, .combine='cfun') %dopar% reverse.connect(i)
+
         Network <- mapply(c,neilist,reverselist, SIMPLIFY=FALSE)
+
         Network
 
       }
