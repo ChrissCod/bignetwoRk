@@ -67,6 +67,7 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
       }
       else{
 
+<<<<<<< HEAD
         pool <- sample( seq(n*(n-1)/2),m)
         connect <- function(j){
           neilist.raw <- list()
@@ -81,11 +82,42 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
         cl <- makeCluster(ncores)   ##Make cluster of cores
         on.exit(stopCluster(cl))
         registerDoParallel(cl, cores = ncores)
+=======
+        pool <- sample.int( n*(n-1)/2,m )
+
+        connect <- function(j){
+
+          neilist.raw <- list()
+          neilist.raw[n] <- list(NULL)
+
+          for (i in seq(j,(n-1),ncores)  ){
+
+            neilist.raw[[i]] <- intersect(pool,seq( i*n-0.5*i^2+0.5*i+1-n, i*n-0.5*i^2-0.5*i ))+i-n*i+n+0.5*i^2-0.5*i
+
+          }
+
+          neilist.raw
+>>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
 
         cfun <- function(a,b){
           cc <- mapply(c,a,b, SIMPLIFY=FALSE)
           cc
         }
+
+<<<<<<< HEAD
+        neilist <- foreach(j = 1:ncores, .combine='cfun') %dopar% connect(j)
+=======
+
+        cl <- makeCluster(ncores)   ##Make cluster of cores
+        registerDoParallel(cl, cores = ncores)
+>>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
+
+        cfun <- function(a,b){
+          cc <- mapply(c,a,b, SIMPLIFY=FALSE)
+          cc
+        }
+
+        j <- NULL
 
         neilist <- foreach(j = 1:ncores, .combine='cfun') %dopar% connect(j)
 
@@ -117,4 +149,6 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
       }
     }
   }
-  }
+}
+
+

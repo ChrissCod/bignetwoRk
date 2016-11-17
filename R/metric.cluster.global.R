@@ -2,32 +2,39 @@
 #'
 
 #' @description Calculate the global clustering coefficient of a graph.
-#' @param Network The input network.
-#' @param node.sample	The percentage of nodes to be selected - random sample (0,1).
-#' @param triplet.sample The number of triplets to explore for each node - random triplets.
-#' @details The global clustering coefficient measures the ratio of triples versus the total number of all possible triples in graph \emph{g}. \code{metric.cluster.global()} calculates the (estimated) global clustering coefficient of graph \emph{g} with a justified error.
+#' @param g The input network.
+#' @details The global clustering coefficient measures the ratio of (closed) triples versus the total number of all possible triples in network \emph{g}. \code{metric.cluster.global()} calculates the global clustering coefficient of \emph{g}.
 #' @return A real constant.
-#' @author Luis Castro, Nazrul Shaikh.
+#' @author Xu Dong, Nazrul Shaikh.
 #' @references Wasserman, Stanley, and Katherine Faust. Social network analysis: Methods and applications. Vol. 8. Cambridge university press, 1994.
 #' @examples \dontrun{
 #' x <-  net.erdos.renyi.gnp(1000, 0.01)
+<<<<<<< HEAD
 #' metric.cluster.global(x, 0.001, 2) }
 #'
+=======
+#' metric.cluster.global(x)}
+>>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
 #' @export
 #' @import parallel
 #' @import doParallel
+#' @import igraph
 
-metric.cluster.global <- function(Network, node.sample, triplet.sample){
+metric.cluster.global <- function(g){
 
+<<<<<<< HEAD
   if (!is.list(Network)) stop("Parameter 'Network' must be a list",call. = FALSE)
   if (node.sample<=0 | node.sample>=1) stop("Parameter 'node.sample' must be in (0,1)",call. = FALSE)
   if (triplet.sample%%1!=0 | triplet.sample <0)  stop("Parameter 'triplet.sample' must be a non negative integer",call. = FALSE)
+=======
+  if (!is.list(g)) stop("Parameter 'g' must be a list",call. = FALSE)
+>>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
 
-  Cores <- detectCores()
+  ig <- simplify(as.undirected(graph_from_adj_list(g)))
 
-  ##/Triplet counting vectorized function
-  Vector.triplets <- function(Network,node,triplet.sample){
+  CC <- transitivity(ig)
 
+<<<<<<< HEAD
     Triplets <- function(Network,node){
 
       ##Sampling at random nodes-edges to count closed and connected triplets
@@ -91,6 +98,8 @@ metric.cluster.global <- function(Network, node.sample, triplet.sample){
   Close <- sum(unlist(Close))
   Conn <- sum(unlist(Conn))
   CC <- Close/Conn
+=======
+>>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
   CC
 
 

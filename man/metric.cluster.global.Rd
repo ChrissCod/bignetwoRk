@@ -4,14 +4,10 @@
 \alias{metric.cluster.global}
 \title{Global Clustering Coefficient}
 \usage{
-metric.cluster.global(Network, node.sample, triplet.sample)
+metric.cluster.global(g)
 }
 \arguments{
-\item{Network}{The input network.}
-
-\item{node.sample}{The percentage of nodes to be selected - random sample (0,1).}
-
-\item{triplet.sample}{The number of triplets to explore for each node - random triplets.}
+\item{g}{The input network.}
 }
 \value{
 A real constant.
@@ -20,16 +16,20 @@ A real constant.
 Calculate the global clustering coefficient of a graph.
 }
 \details{
-The global clustering coefficient measures the ratio of triples versus the total number of all possible triples in graph \emph{g}. \code{metric.cluster.global()} calculates the (estimated) global clustering coefficient of graph \emph{g} with a justified error.
+The global clustering coefficient measures the ratio of (closed) triples versus the total number of all possible triples in network \emph{g}. \code{metric.cluster.global()} calculates the global clustering coefficient of \emph{g}.
 }
 \examples{
 \dontrun{
 x <-  net.erdos.renyi.gnp(1000, 0.01)
+<<<<<<< HEAD
 metric.cluster.global(x, 0.001, 2) }
 
+=======
+metric.cluster.global(x)}
+>>>>>>> ae0bd9541c7dabe9a1b1c4c0be30d2d80c82ce02
 }
 \author{
-Luis Castro, Nazrul Shaikh.
+Xu Dong, Nazrul Shaikh.
 }
 \references{
 Wasserman, Stanley, and Katherine Faust. Social network analysis: Methods and applications. Vol. 8. Cambridge university press, 1994.
