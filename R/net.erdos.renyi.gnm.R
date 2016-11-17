@@ -6,7 +6,7 @@
 #' @param ncores Number of cores, by default \code{detectCores()} from \code{parallel}.
 #' @param d A logical value determining whether is a network directed (default) or indirected.
 #' @details In this (simplest) random network, \emph{m} edges are formed at random among \emph{n} nodes.
-#'When \code{d = TRUE} is a directed network.
+#' When \code{d = TRUE} is a directed network.
 #' @return A list containing the nodes of the network and their respective neighbors.
 #' @author Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
