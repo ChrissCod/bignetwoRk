@@ -8,7 +8,7 @@
 #' @details In this (simplest) random network, each edge is formed at random with a constant probability.
 #' When \code{d = TRUE} is a directed network.
 #' @return A list containing the nodes of the network and their respective neighbors.
-#' @author Luis Castro, Xu Dong, Nazrul Shaihk.
+#' @author Luis Castro, Xu Dong, Nazrul Shaikh.
 #' @examples \dontrun{
 #' x <- net.erdos.renyi.gnp(1000, 0.01)}
 #' @import parallel

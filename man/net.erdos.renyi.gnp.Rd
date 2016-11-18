@@ -30,7 +30,7 @@ When \code{d = TRUE} is a directed network.
 x <- net.erdos.renyi.gnp(1000, 0.01)}
 }
 \author{
-Luis Castro, Xu Dong, Nazrul Shaihk.
+Luis Castro, Xu Dong, Nazrul Shaikh.
 }
 \references{
 Erdos, P. and Renyi, A., On random graphs, Publicationes Mathematicae 6, 290-297 (1959).
