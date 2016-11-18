@@ -31,10 +31,8 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
     }
     else{
       if (d == TRUE) {
-        #neilist <- list()
-        #neilist[n] <- list(NULL)
 
-        pool <- sample( seq(n*(n-1)),m )
+        pool <- sample.int( n*(n-1),m )
 
         cl <- makeCluster(ncores)
         on.exit(stopCluster(cl))
@@ -45,9 +43,9 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
           nei <- list()
           nei[n] <- list(NULL)
 
-          for (j in seq(i,n,ncores)  ){
+          for (j in seq( i, n, ncores )  ){
 
-            raw.nei <- intersect(pool, seq((j-1)*(n-1)+1, j*(n-1)))%%(n-1)
+            raw.nei <- (intersect(pool, seq((j-1)*(n-1)+1, j*(n-1)))-1)%%(n-1)+1
 
             nei[[j]] <- c( raw.nei[raw.nei<j], raw.nei[raw.nei>=j]+1 )
 
@@ -131,5 +129,6 @@ net.erdos.renyi.gnm <- function(n, m, ncores = detectCores(), d = TRUE){
     }
   }
 }
+
 
 
